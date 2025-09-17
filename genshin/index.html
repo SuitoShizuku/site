@@ -101,12 +101,13 @@
                 <label>雷ダメージバフ: <input type="text" id="damagebuff-5" placeholder="46.6%の場合46.6" value="0">%</label><br>
                 <label>風ダメージバフ: <input type="text" id="damagebuff-6" placeholder="46.6%の場合46.6" value="0">%</label><br>
                 <label>岩ダメージバフ: <input type="text" id="damagebuff-7" placeholder="46.6%の場合46.6" value="0">%</label><br>
-                <label>通常攻撃ダメージバフ: <input type="text" id="damagebuff-8" placeholder="35%の場合35" value="0">%</label><br>
-                <label>重撃ダメージバフ: <input type="text" id="damagebuff-9" placeholder="40%の場合40" value="0">%</label><br>
-                <label>落下攻撃ダメージバフ: <input type="text" id="damagebuff-10" placeholder="20%の場合20" value="0">%</label><br>
-                <label>元素スキルダメージバフ: <input type="text" id="damagebuff-11" placeholder="35%の場合35" value="0">%</label><br>
-                <label>元素爆発ダメージバフ: <input type="text" id="damagebuff-12" placeholder="75%の場合75" value="0">%</label><br>
-                <label>全ダメージバフ: <input type="text" id="damagebuff-13" placeholder="30%の場合30" value="0">%</label>
+                <label>草ダメージバフ: <input type="text" id="damagebuff-8" placeholder="46.6%の場合46.6" value="0">%</label><br>
+                <label>通常攻撃ダメージバフ: <input type="text" id="damagebuff-9" placeholder="35%の場合35" value="0">%</label><br>
+                <label>重撃ダメージバフ: <input type="text" id="damagebuff-10" placeholder="40%の場合40" value="0">%</label><br>
+                <label>落下攻撃ダメージバフ: <input type="text" id="damagebuff-11" placeholder="20%の場合20" value="0">%</label><br>
+                <label>元素スキルダメージバフ: <input type="text" id="damagebuff-12" placeholder="35%の場合35" value="0">%</label><br>
+                <label>元素爆発ダメージバフ: <input type="text" id="damagebuff-13" placeholder="75%の場合75" value="0">%</label><br>
+                <label>全ダメージバフ: <input type="text" id="damagebuff-14" placeholder="30%の場合30" value="0">%</label>
             </div>
             <h3>敵耐性</h3>
             <div>
@@ -186,12 +187,13 @@
                         <label>基礎ダメ加算<input type="text" id="AddBaseDmg" placeholder="基礎ダメージの実数加算値"></label>
                 </details>
             </div>
-            <label><h2>会心 <b id="damage-print-crit">0</b> ダメージ</h2></label>
+            <div id="output-damage">
+            <label class="text-damage-print text-crit"><h2>会心 <b id="damage-print-crit" class="text-damage">0</b> ダメージ</h2></label>
             <div>
-                <label>会心期待値<b id="damage-print">0</b>ダメージ</label><br>
-                <label>非会心<b id="damage-print-nocrit">0</b>ダメージ</label>
-            </div>
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                <label class="text-damage-print text-nocrit">会心期待値<b id="damage-print" class="text-damage">0</b>ダメージ</label><br>
+                <label class="text-damage-print text-nocrit">非会心<b id="damage-print-nocrit" class="text-damage">0</b>ダメージ</label>
+            </div></div>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         </div>
     </div>
 </body>
