@@ -11,7 +11,7 @@ window.addEventListener('load', function () {
 
 
         let op1 = document.createElement('option');
-        op1.textContent = 'きゃらー'
+        op1.textContent = 'UIDインポートは未完成です'
         op1.value = '1'
 
 
