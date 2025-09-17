@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="./script.js"></script>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <title>原神-ダメージ計算</title>
+</head>
+
+<body>
+    <div>
+        <div id="uids">
+            <label>UID: <input type="text" name="UID" id="uid"><button type="button" id="getUID">取得</button></label>
+        </div>
+        <div id="charas">
+            <select name="charactor" id="charaSelect">
+                <option value="" id="nonSelect">キャラクター選択</option>
+                <div id="addedChara">
+                </div>
+            </select>
+        </div>
+    </div>
+    <div id="calc">
+        <div id="status">
+            <h3>基礎ステータス</h3>
+            <div id="base">
+                <label>レベル: <input type="text" name="LVL" id="level" value="90"></label><br><br>
+                <label>攻撃力: <input type="text" name="ATK" id="status_atk"></label>
+                <details>
+                    <summary>バフ</summary>
+                    <label>基礎攻撃力: <input type="text" name="BASE_ATK" id="status_baseatk"
+                            placeholder="ステータス詳細の白い数値"></label>
+                    <label>割合バフ(%): <input type="text" name="BUFF_ATK_per" id="buff_atk_per" class="BUFF_ATK"
+                            placeholder="50%の場合50"></label>
+                    <label>実数バフ: <input type="text" name="BUFF_ATK_int" id="buff_atk_int" class="BUFF_ATK"
+                            placeholder="実数によるバフ"></label>
+                    <br>
+                    <button type="button" id="mathAtk">計算</button><label id="mathAtkOut"></label> <br>
+                    <button type="button" id="addAtk">計算して総攻撃力に加算</button>
+                </details><br>
+                <label>体力: <input type="text" name="HP" id="status_hp"></label>
+                <details>
+                    <summary>バフ</summary>
+                    <label>基礎体力: <input type="text" name="BASE_HP" id="status_basehp"
+                            placeholder="ステータス詳細の白い数値"></label>
+                    <label>割合バフ: <input type="text" name="BUFF_HP_per" id="buff_hp_per" class="BUFF_HP"
+                            placeholder="50%の場合50"></label>
+                    <label>実数バフ: <input type="text" name="BUFF_HP_int" id="buff_hp_int" class="BUFF_HP"
+                            placeholder="実数によるバフ"></label>
+                    <br>
+                    <button type="button" id="mathHp">計算</button><label id="mathHtkOut"></label> <br>
+                    <button type="button" id="addHp">計算して総攻撃力に加算</button>
+                </details><br>
+                <label>防御力: <input type="text" name="DEF" id="status_def"></label>
+                <details>
+                    <summary>バフ</summary>
+                    <label>基礎防御力: <input type="text" name="BASE_DEF" id="status_basedef"
+                            placeholder="ステータス詳細の白い数値"></label>
+                    <label>割合バフ: <input type="text" name="BUFF_DEF_per" id="buff_def_per" class="BUFF_DEF"
+                            placeholder="50%の場合50"></label>
+                    <label>実数バフ: <input type="text" name="BUFF_DEF_int" id="buff_def_int" class="BUFF_DEF"
+                            placeholder="実数によるバフ"></label>
+                    <br>
+                    <button type="button" id="mathDef">計算</button><label id="mathDefOut"></label> <br>
+                    <button type="button" id="addDef">計算して総攻撃力に加算</button>
+                </details><br>
+                <h4>反応強化</h4>
+                <label>元素熟知: <input type="text" name="EM" id="status_em"></label>
+                <br>
+                <lavel>蒸発・溶解によるダメージ<b id="em-bonus-1" class="disinline">+0%</b></lavel> <br>
+                <lavel>燃焼・過負荷・超電導・感電・氷砕き・拡散・開花によるダメージ<b id="em-bonus-2" class="disinline">+0%</b></lavel> <br>
+                <lavel>超激化・草激化によるダメージ<b id="em-bonus-3" class="disinline">+0%</b></lavel> <br>
+                <lavel>月感電・月開花によるダメージ<b id="em-bonus-4" class="disinline">+0%</b></lavel> <br>
+            </div>
+            <h3>会心</h3>
+            <div id="crit">
+                <label>会心率: <input type="text" name="CRIT-RATE" id="status_critrate" placeholder="50%の場合50"
+                        value="5"></label>
+                <details>
+                    <summary>バフ</summary>
+                    <label>装備・外部による会心率up効果: <input type="text" id="critRateBuff" placeholder="50%の場合50"><button
+                            type="button" id="addCritRate">総会心率に加算</button></label>
+                </details><br>
+                <label>会心ダメージ: <input type="text" name="CRIT-DMG" id="status_critdmg" placeholder="50%の場合50"
+                        value="50"></label>
+                <details>
+                    <summary>バフ</summary>
+                    <label>装備・外部による会心ダメup効果: <input type="text" id="critDmgBuff" placeholder="50%の場合50"><button
+                            type="button" id="addCritDmg">総会心ダメに加算</button></label>
+                </details><br>
+                <h4>会心期待値</h4>
+                <label>ダメージ<b id="critDamageRate">1.025</b>倍</label>
+            </div>
+            <h3>ダメージバフ</h3>
+            <div id="damagebuff">
+                <label>物理ダメージバフ: <input type="text" id="damagebuff-1" placeholder="58.3%の場合58.3" value="0">%</label><br>
+                <label>炎ダメージバフ: <input type="text" id="damagebuff-2" placeholder="46.6%の場合46.6" value="0">%</label><br>
+                <label>水ダメージバフ: <input type="text" id="damagebuff-3" placeholder="46.6%の場合46.6" value="0">%</label><br>
+                <label>氷ダメージバフ: <input type="text" id="damagebuff-4" placeholder="46.6%の場合46.6" value="0">%</label><br>
+                <label>雷ダメージバフ: <input type="text" id="damagebuff-5" placeholder="46.6%の場合46.6" value="0">%</label><br>
+                <label>風ダメージバフ: <input type="text" id="damagebuff-6" placeholder="46.6%の場合46.6" value="0">%</label><br>
+                <label>岩ダメージバフ: <input type="text" id="damagebuff-7" placeholder="46.6%の場合46.6" value="0">%</label><br>
+                <label>通常攻撃ダメージバフ: <input type="text" id="damagebuff-8" placeholder="35%の場合35" value="0">%</label><br>
+                <label>重撃ダメージバフ: <input type="text" id="damagebuff-9" placeholder="40%の場合40" value="0">%</label><br>
+                <label>落下攻撃ダメージバフ: <input type="text" id="damagebuff-10" placeholder="20%の場合20" value="0">%</label><br>
+                <label>元素スキルダメージバフ: <input type="text" id="damagebuff-11" placeholder="35%の場合35" value="0">%</label><br>
+                <label>元素爆発ダメージバフ: <input type="text" id="damagebuff-12" placeholder="75%の場合75" value="0">%</label><br>
+                <label>全ダメージバフ: <input type="text" id="damagebuff-13" placeholder="30%の場合30" value="0">%</label>
+            </div>
+            <h3>敵耐性</h3>
+            <div>
+                <h4>計算するダメージにかかる元素耐性</h4>
+                <label>敵の基礎耐性<input type="text" placeholder="10%の場合10" value="10" id="res-base">%</label><br>
+                <label>敵の耐性バフ<input type="text" placeholder="10%の場合10" value="0" id="res-up">%</label><br>
+                <label>敵の耐性ダウン<input type="text" placeholder="40%の場合40" value="0" id="res-down">%</label><br>
+                <h4>敵耐性係数</h4>
+                <label id="res-out"></label>
+                <h4>計算するダメージにかかる防御補正</h4>
+                <label>敵のレベル<input type="text" placeholder="" value="95" id="target-level"></label><br>
+                <label>防御無視<input type="text" placeholder="雷電将軍2凸等の効果" value="0" id="target-def-ignore">%</label><br>
+                <label>防御ダウン<input type="text" placeholder="リサ固有天賦2等の効果" value="0" id="target-def-down">%</label><br>
+                <h4>敵防御係数</h4>
+                <label id="target-def-out"></label>
+            </div>
+            <h3>ダメージ一覧</h3>
+            <div>
+                <h4>元素反応ダメージ</h4>
+                <label>燃焼 反応ボーナス:<input type="text" id="react-bonus-1" placeholder="20%の場合20" value="0">%</label><br>
+                <label><b id="react1"></b></label><br>
+                <label>超伝導 反応ボーナス:<input type="text" id="react-bonus-2" placeholder="20%の場合20" value="0">%</label><br>
+                <label><b id="react2"></b></label><br>
+                <label>拡散 反応ボーナス:<input type="text" id="react-bonus-3" placeholder="20%の場合20" value="0">%</label><br>
+                <label><b id="react3"></b></label><br>
+                <label>感電 反応ボーナス:<input type="text" id="react-bonus-4" placeholder="20%の場合20" value="0">%</label><br>
+                <label><b id="react4"></b></label><br>
+                <label>氷砕き 反応ボーナス:<input type="text" id="react-bonus-5" placeholder="20%の場合20" value="0">%</label><br>
+                <label><b id="react5"></b></label><br>
+                <label>過負荷 反応ボーナス:<input type="text" id="react-bonus-6" placeholder="20%の場合20" value="0">%</label><br>
+                <label><b id="react6"></b></label><br>
+                <label>開花 反応ボーナス:<input type="text" id="react-bonus-7" placeholder="20%の場合20" value="0">% <label id="nilo_bloom">豊穣開花:<input type="checkbox" id="if_nilo"><label id="nilo"></label></label></label><br>
+                <label><b id="react7"></b></label><br>
+                <label>超/烈開花 反応ボーナス:<input type="text" id="react-bonus-8" placeholder="20%の場合20" value="0">%</label><br>
+                <label><b id="react8"></b></label>
+            </div>
+            <h3>キャラクターの与えるダメージ</h3>
+            <div id="damage-type">
+                <label>元素<select id="element-type">
+                        <option value="1">物理</option>
+                        <option value="2">炎</option>
+                        <option value="3">水</option>
+                        <option value="4">氷</option>
+                        <option value="5">雷</option>
+                        <option value="6">風</option>
+                        <option value="7">岩</option>
+                        <option value="8">草</option>
+                    </select></label><br>
+                <div style="display: none;" id="box_vaporize"><label>蒸発反応<input type="checkbox" id="vaporize"></label><br></div>
+                <div style="display: none;" id="box_melt"><label>溶解反応<input type="checkbox" id="melt"></label><br></div>
+                <div style="display: none;" id="box_aggravate"><label>超激化反応<input type="checkbox" id="aggravate"></label><br></div>
+                <div style="display: none;" id="box_lunar_charged"><label>月感電反応扱い<input type="checkbox" id="lunar_charged"></label><br></div>
+                <div style="display: none;" id="box_spread"><label>草激化反応<input type="checkbox" id="spread"></label><br></div>
+                <div style="display: none;" id="box_lunar_bloom"><label>月開花反応扱い<input type="checkbox" id="lunar_bloom"></label><br></div>
+                <label>蒸発/溶解 反応ボーナス:<input type="text" id="react-bonus-9" placeholder="20%の場合20" value="0">%</label><br>
+                <label><b id="react9"></b></label>
+                <label>激化反応ボーナス:<input type="text" id="react-bonus-10" placeholder="20%の場合20" value="0">%</label><br>
+                <label><b id="react10"></b></label>
+                <label>判定<select id="attack-type">
+                        <option value="1">通常攻撃ダメージ</option>
+                        <option value="2">重撃ダメージ</option>
+                        <option value="3">落下攻撃</option>
+                        <option value="4">元素スキルダメージ</option>
+                        <option value="5">元素爆発ダメージ</option>
+                        <option value="6">星座・固有天賦ダメージ</option>
+                    </select></label><br>
+                <p>ダメージ倍率:<br><label><span id="atkRateViewBase">攻撃力</span><input type="text" id="atkRate" value="100" placeholder="メインのダメージ倍率">%</label><label style="display: none;" id="emRateView">+元素熟知<input type="text" id="emRate" placeholder="元素熟知の倍率">%</lavel></p>
+                <details>
+                    <summary>詳細</summary>
+                        <label>参照元: <select id="atkRate-Base">
+                            <option value="1">攻撃力</option>
+                            <option value="2">体力</option>
+                            <option value="3">防御力</option>
+                            <option value="4">元素熟知</option>
+                            <option value="5">攻撃力+元素熟知</option>
+                        </select><br>
+                        <label>基礎ダメ加算<input type="text" id="AddBaseDmg" placeholder="基礎ダメージの実数加算値"></label>
+                </details>
+            </div>
+            <label><h2>会心 <b id="damage-print-crit">0</b> ダメージ</h2></label>
+            <div>
+                <label>会心期待値<b id="damage-print">0</b>ダメージ</label><br>
+                <label>非会心<b id="damage-print-nocrit">0</b>ダメージ</label>
+            </div>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        </div>
+    </div>
+</body>
+
+</html>
