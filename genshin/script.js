@@ -138,6 +138,7 @@ window.addEventListener('load', function () {
     document.getElementById('damagebuff-11').oninput = mathDamage;
     document.getElementById('damagebuff-12').oninput = mathDamage;
     document.getElementById('damagebuff-13').oninput = mathDamage;
+    document.getElementById('damagebuff-14').oninput = mathDamage;
 
 
     function calcResistance(){
@@ -379,6 +380,7 @@ const lightenColor = (rgb, percentage) => {
         mathDamage();
     }
     document.getElementById('atkRate-Base').onchange = atkRateBase;
+    document.getElementById('atkRate-Multiple').onchange = mathDamage;
 
     function mathDamage(){
         //先に必要な情報を入れる
@@ -409,6 +411,7 @@ const lightenColor = (rgb, percentage) => {
 
         //基礎ダメージ算出
         let BaseDamage = Number(document.getElementById('atkRate').value) * 0.01 //倍率
+        BaseDamage *= Number(document.getElementById('atkRate-Multiple').value) * 0.01 //特殊乗算
         if(atkRateBase == 1) { //参照したステータスを倍率とかける
             BaseDamage *= Number(document.getElementById('status_atk').value)
         }else if(atkRateBase == 2) {

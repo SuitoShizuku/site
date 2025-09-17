@@ -88,7 +88,7 @@
                     <summary>バフ</summary>
                     <label>装備・外部による会心ダメup効果: <input type="text" id="critDmgBuff" placeholder="50%の場合50"><button
                             type="button" id="addCritDmg">総会心ダメに加算</button></label>
-                </details><br>
+                </details>
                 <h4>会心期待値</h4>
                 <label>ダメージ<b id="critDamageRate">1.025</b>倍</label>
             </div>
@@ -184,7 +184,8 @@
                             <option value="4">元素熟知</option>
                             <option value="5">攻撃力+元素熟知</option>
                         </select><br>
-                        <label>基礎ダメ加算<input type="text" id="AddBaseDmg" placeholder="基礎ダメージの実数加算値"></label>
+                        <label>基礎ダメ加算<input type="text" id="AddBaseDmg" placeholder="基礎ダメージの実数加算値"></label><br>
+                        <label>特殊乗算<input type="text" id="atkRate-Multiple" placeholder="宵宮・放浪者・リオセスリのスキル等" value="100">%</label>
                 </details>
             </div>
             <div id="output-damage">
