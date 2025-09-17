@@ -233,9 +233,23 @@ window.addEventListener('load', function () {
             box.style.display = 'none'
         }
     }
+const lightenColor = (rgb, percentage) => {
+  let [r, g, b] = rgb.match(/\d+/g).map(x => x * percentage);
+  return `rgb(${r}, ${g}, ${b})`;
+}
     function ReactBox(){
         const element = document.getElementById('element-type').value
-        if(element == '2') {
+        var text_color = document.getElementById('output-damage')
+        if(element == '1') {
+            text_color.style.color = '#FFFFFF'
+            BoxViewToggle('vaporize', 'hide')
+            BoxViewToggle('melt', 'hide')
+            BoxViewToggle('aggravate', 'hide')
+            BoxViewToggle('lunar_charged', 'hide')
+            BoxViewToggle('spread', 'hide')
+            BoxViewToggle('lunar_bloom', 'hide')
+        }else if(element == '2') {
+            text_color.style.color = '#FF9B00'
             BoxViewToggle('vaporize', 'show')
             BoxViewToggle('melt', 'show')
             BoxViewToggle('aggravate', 'hide')
@@ -243,6 +257,7 @@ window.addEventListener('load', function () {
             BoxViewToggle('spread', 'hide')
             BoxViewToggle('lunar_bloom', 'hide')
         }else if(element == '3') {
+            text_color.style.color = '#33CCFF'
             BoxViewToggle('vaporize', 'show')
             BoxViewToggle('melt', 'hide')
             BoxViewToggle('aggravate', 'hide')
@@ -250,6 +265,7 @@ window.addEventListener('load', function () {
             BoxViewToggle('spread', 'hide')
             BoxViewToggle('lunar_bloom', 'hide')
         }else if(element == '4') {
+            text_color.style.color = '#99FFFF'
             BoxViewToggle('vaporize', 'hide')
             BoxViewToggle('melt', 'show')
             BoxViewToggle('aggravate', 'hide')
@@ -257,13 +273,31 @@ window.addEventListener('load', function () {
             BoxViewToggle('spread', 'hide')
             BoxViewToggle('lunar_bloom', 'hide')
         }else if(element == '5') {
+            text_color.style.color = '#E19BFF'
             BoxViewToggle('vaporize', 'hide')
             BoxViewToggle('melt', 'hide')
             BoxViewToggle('aggravate', 'show')
             BoxViewToggle('lunar_charged', 'show')
             BoxViewToggle('spread', 'hide')
             BoxViewToggle('lunar_bloom', 'hide')
+        }else if(element == '6') {
+            text_color.style.color = '#66FFCC'
+            BoxViewToggle('vaporize', 'hide')
+            BoxViewToggle('melt', 'hide')
+            BoxViewToggle('aggravate', 'hide')
+            BoxViewToggle('lunar_charged', 'hide')
+            BoxViewToggle('spread', 'hide')
+            BoxViewToggle('lunar_bloom', 'hide')
+        }else if(element == '7') {
+            text_color.style.color = '#FFCC66'
+            BoxViewToggle('vaporize', 'hide')
+            BoxViewToggle('melt', 'hide')
+            BoxViewToggle('aggravate', 'hide')
+            BoxViewToggle('lunar_charged', 'hide')
+            BoxViewToggle('spread', 'hide')
+            BoxViewToggle('lunar_bloom', 'hide')
         }else if(element == '8') {
+            text_color.style.color = '#00EA52'
             BoxViewToggle('vaporize', 'hide')
             BoxViewToggle('melt', 'hide')
             BoxViewToggle('aggravate', 'hide')
@@ -278,6 +312,8 @@ window.addEventListener('load', function () {
             BoxViewToggle('spread', 'hide')
             BoxViewToggle('lunar_bloom', 'hide')
         }
+        text_color.style.webkitTextStrokeColor = lightenColor(document.getElementById('output-damage').style.color, 0.6)
+        text_color.style.webkitTextStrokeWidth = '0.5px'
         mathDamage()
     }
     document.getElementById('element-type').onchange = ReactBox;
@@ -346,13 +382,16 @@ window.addEventListener('load', function () {
 
     function mathDamage(){
         //先に必要な情報を入れる
+        const REACTION_BY_LV = [0, 17.165605, 18.535048, 19.904854, 21.274903, 22.6454, 24.649613, 26.640643, 28.868587, 31.367679, 34.143343, 37.201, 40.66, 44.446668, 48.563519, 53.74848, 59.081897, 64.420047, 69.724455, 75.123137, 80.584775, 86.112028, 91.703742, 97.244628, 102.812644, 108.409563, 113.201694, 118.102906, 122.979318, 129.72733, 136.29291, 142.67085, 149.029029, 155.416987, 161.825495, 169.106313, 176.518077, 184.072741, 191.709518, 199.556908, 207.382042, 215.3989, 224.165667, 233.50216, 243.350573, 256.063067, 268.543493, 281.526075, 295.013648, 309.067188, 323.601597, 336.757542, 350.530312, 364.482705, 378.619181, 398.600417, 416.398254, 434.386996, 452.951051, 472.606217, 492.88489, 513.568543, 539.103198, 565.510563, 592.538753, 624.443427, 651.470148, 679.49683, 707.79406, 736.671422, 765.640231, 794.773403, 824.677397, 851.157781, 877.74209, 914.229123, 946.746752, 979.411386, 1011.223022, 1044.791746, 1077.443668, 1109.99754, 1142.976615, 1176.369483, 1210.184393, 1253.835659, 1288.952801, 1325.484092, 1363.456928, 1405.097377, 1446.853458, 1488.215547, 1528.444567, 1580.367911, 1630.847528, 1711.197785, 1780.453941, 1847.322809, 1911.474309, 1972.864342, 2030.071808]
+        const LEVEL = document.getElementById('level').value
         const atkRateBase = document.getElementById('atkRate-Base').value //参照先
         const attack_type = Number(document.getElementById('attack-type').value) //攻撃タイプ
         const element = document.getElementById('element-type').value //元素タイプ
         const lunar_reaction = [document.getElementById('lunar_charged').checked,document.getElementById('lunar_bloom').checked] //月反応
         const pyro_reaction = [document.getElementById('vaporize').checked, document.getElementById('melt').checked] // 蒸発・溶解
+        const catalyze = [document.getElementById('aggravate').checked, document.getElementById('spread').checked] // 超・草激化
         const DamageBuffList = [ //ダメバフ情報のすべてを配列化
-            0.01*Number(document.getElementById('damagebuff-13').value),
+            0.01*Number(document.getElementById('damagebuff-14').value),
             0.01*Number(document.getElementById('damagebuff-1').value),
             0.01*Number(document.getElementById('damagebuff-2').value),
             0.01*Number(document.getElementById('damagebuff-3').value),
@@ -365,6 +404,7 @@ window.addEventListener('load', function () {
             0.01*Number(document.getElementById('damagebuff-10').value),
             0.01*Number(document.getElementById('damagebuff-11').value),
             0.01*Number(document.getElementById('damagebuff-12').value),
+            0.01*Number(document.getElementById('damagebuff-13').value),
         ]
 
         //基礎ダメージ算出
@@ -378,17 +418,24 @@ window.addEventListener('load', function () {
         }else if(atkRateBase == 4) {
             BaseDamage *= Number(document.getElementById('status_em').value)
         }else if(atkRateBase == 5) {
+            BaseDamage *= Number(document.getElementById('status_atk').value)
             var emDamage = Number(document.getElementById('emRate').value) * 0.01 //攻撃倍率+熟知倍率
             emDamage *= Number(document.getElementById('status_em').value)
             BaseDamage += emDamage
         }
-        BaseDamage += Number(document.getElementById('AddBaseDmg').value) //基礎ダメ加算
+        let addCatalyze = 0
+        if(catalyze[0] == true){//元素反応処理(激化)
+            addCatalyze = (1.15 * REACTION_BY_LV[LEVEL] * (1 + Number(document.getElementById('em-bonus-3').textContent.slice(1,-2)) * 0.01 + Number(document.getElementById('react-bonus-10').value) * 0.01))
+        }else if(catalyze[1] == true){//元素反応処理(激化)
+            addCatalyze = (1.25 * REACTION_BY_LV[LEVEL] * (1 + Number(document.getElementById('em-bonus-3').textContent.slice(1,-2)) * 0.01 + Number(document.getElementById('react-bonus-10').value) * 0.01))
+        }
+        BaseDamage += Number(document.getElementById('AddBaseDmg').value) + addCatalyze //基礎ダメ加算
         let Damage = BaseDamage//基礎ダメージ結果をわかりやすく名前を変える
 
         //ダメージバフ処理
-        let DamageBuff = 1+DamageBuffList[0]+DamageBuffList[element]+DamageBuffList[attack_type+7]
+        let DamageBuff = 1+DamageBuffList[0]+DamageBuffList[element]+DamageBuffList[attack_type+8]
         Damage *= DamageBuff
-        //元素反応処理
+        //元素反応処理(蒸発・溶解)
         if(element == '2'){
             if(pyro_reaction[0]){
                 Damage *= 1.5 * (1 + Number(document.getElementById('em-bonus-1').textContent.slice(1,-2)) * 0.01 + Number(document.getElementById('react-bonus-9').value) * 0.01)
