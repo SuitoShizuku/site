@@ -1,0 +1,58 @@
+.body {
+    background-color: #396378;
+    font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
+}
+.center {
+    height: 98.5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.button {
+    display: inline-block;
+    background-color: #ffffff60;
+    border: solid 3px #0072bd;
+    color: #000000;
+    width: 60%;
+    height: 40%;
+    border-radius: 10px;
+    line-height: 100px;
+    text-align: center;
+    font-size: 500%;
+    text-decoration: none;
+}
+.button:hover {
+    background-color: #ffffffA0;
+}
+.sleep {
+    vertical-align: middle;
+    display: inline-block;
+    background-color: #ffffff00;
+    border: solid 3px #561a58;
+    -webkit-text-stroke: 3px #561a58;
+    color: #000000;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    line-height: 100px;
+    text-align: center;
+    font-size: 1300%;
+    text-decoration: none;
+    align-content: center;
+}
+.wake {
+    vertical-align: middle;
+    display: inline-block;
+    background-color: #ffffff00;
+    border: solid 3px #996128;
+    -webkit-text-stroke: 3px #996128;
+    color: #000000;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    line-height: 100px;
+    text-align: center;
+    font-size: 1300%;
+    text-decoration: none;
+    align-content: center;
+}
