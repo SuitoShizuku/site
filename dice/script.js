@@ -4,10 +4,10 @@ window.addEventListener('load', function () {
         var box = document.getElementById('box');
         let output = document.createElement('b');
         if(Math.floor(Math.random() + 0.5) == 1){
-            output.textContent = '寝なさい';
+            output.textContent = '寝ろ!';
             output.className = 'sleep'
         }else{
-            output.textContent = '起きなさい';
+            output.textContent = '起きろ!';
             output.className = 'wake'
         };
         button.remove();
