@@ -285,7 +285,7 @@ window.addEventListener('load', function () {
         var vaporize = document.getElementById('vaporize')
         var melt = document.getElementById('melt')
         const element = document.getElementById('element-type').value
-        if(element !== '2') return
+        if(element !== '2') return mathDamage()
         if(vaporize.checked) {
             melt.disable = true
             melt.checked = false
@@ -301,7 +301,7 @@ window.addEventListener('load', function () {
         var aggravate = document.getElementById('aggravate')
         var lunar_charged = document.getElementById('lunar_charged')
         const element = document.getElementById('element-type').value
-        if(element !== '5') return
+        if(element !== '5') return mathDamage()
         if(aggravate.checked) {
             lunar_charged.disable = true
             lunar_charged.checked = false
@@ -317,7 +317,7 @@ window.addEventListener('load', function () {
         var spread = document.getElementById('spread')
         var lunar_bloom = document.getElementById('lunar_bloom')
         const element = document.getElementById('element-type').value
-        if(element !== '8') return
+        if(element !== '8') return mathDamage()
         if(spread.checked) {
             lunar_bloom.disable = true
             lunar_bloom.checked = false
@@ -388,7 +388,6 @@ window.addEventListener('load', function () {
         //ダメージバフ処理
         let DamageBuff = 1+DamageBuffList[0]+DamageBuffList[element]+DamageBuffList[attack_type+7]
         Damage *= DamageBuff
-
         //元素反応処理
         if(element == '2'){
             if(pyro_reaction[0]){
@@ -397,6 +396,7 @@ window.addEventListener('load', function () {
                 Damage *= 2 * (1 + Number(document.getElementById('em-bonus-1').textContent.slice(1,-2)) * 0.01 + Number(document.getElementById('react-bonus-9').value) * 0.01)
             }
         }else if(element == '3'){
+            console.log(pyro_reaction)
             if(pyro_reaction[0]){
                 Damage *= 2 * (1 + Number(document.getElementById('em-bonus-1').textContent.slice(1,-2)) * 0.01 + Number(document.getElementById('react-bonus-9').value) * 0.01)
             }
