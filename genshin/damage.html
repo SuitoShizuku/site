@@ -75,18 +75,18 @@
             </div>
             <h3>会心</h3>
             <div id="crit">
-                <label>会心率: <input type="text" name="CRIT-RATE" id="status_critrate" placeholder="50%の場合50"
+                <label>会心率: <input type="text" name="CRIT-RATE" id="status_critrate" placeholder="5%の場合5"
                         value="5"></label>
                 <details>
                     <summary>バフ</summary>
-                    <label>装備・外部による会心率up効果: <input type="text" id="critRateBuff" placeholder="50%の場合50"><button
+                    <label>装備・外部による会心率up効果: <input type="text" id="critRateBuff" placeholder="40%の場合40"><button
                             type="button" id="addCritRate">総会心率に加算</button></label>
                 </details><br>
-                <label>会心ダメージ: <input type="text" name="CRIT-DMG" id="status_critdmg" placeholder="50%の場合50"
+                <label>会心ダメージ: <input type="text" name="CRIT-DMG" id="status_critdmg" placeholder="90%の場合90"
                         value="50"></label>
                 <details>
                     <summary>バフ</summary>
-                    <label>装備・外部による会心ダメup効果: <input type="text" id="critDmgBuff" placeholder="50%の場合50"><button
+                    <label>装備・外部による会心ダメup効果: <input type="text" id="critDmgBuff" placeholder="40%の場合40"><button
                             type="button" id="addCritDmg">総会心ダメに加算</button></label>
                 </details>
                 <h4>会心期待値</h4>
@@ -185,7 +185,7 @@
                             <option value="5">攻撃力+元素熟知</option>
                         </select><br>
                         <label>基礎ダメ加算<input type="text" id="AddBaseDmg" placeholder="基礎ダメージの実数加算値"></label><br>
-                        <label>特殊乗算<input type="text" id="atkRate-Multiple" placeholder="宵宮・放浪者・リオセスリのスキル等" value="100">%</label>
+                        <label>特殊乗算<input type="text" id="atkRate-Multiple" placeholder="宵宮・放浪者のスキル等" value="100">%</label>
                 </details>
             </div>
             <div id="output-damage">
