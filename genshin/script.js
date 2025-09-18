@@ -375,11 +375,11 @@ window.addEventListener('load', function () {
             BoxViewToggle('lunar_bloom', 'hide')
         }
         text_color.style.webkitTextStrokeColor = lightenColor(document.getElementById('output-damage').style.color, 0.6)
-        text_color.style.webkitTextStrokeWidth = '0.2px'
         lrColor();
         mathDamage();
     }
     document.getElementById('element-type').onchange = ReactBox;
+    ReactBox()
     function PyroReactBox() {//炎元素選択時の複数元素反応選択対策
         var vaporize = document.getElementById('vaporize')
         var melt = document.getElementById('melt')

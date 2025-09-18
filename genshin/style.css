@@ -6,6 +6,10 @@
     text-align: center;
     font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
 }
+.text-damage-print{
+  -webkit-text-stroke-width: 0.5px;
+  font-weight: bold;
+}
 .lunar-charged{
   background: -webkit-linear-gradient(top, #E19BFF, #fff);
   -webkit-background-clip: text;
@@ -34,4 +38,5 @@
 }
 .text-damage{
     font-family: 'genshin';
+    -webkit-text-stroke-width: 0.2px;
 }
