@@ -40,3 +40,11 @@
     font-family: 'genshin';
     -webkit-text-stroke-width: 0.2px;
 }
+.output-damage-box{
+  background-image: url('./image/damage-background.png');
+  background-size: cover;
+  background-position-y: center;
+  vertical-align: middle;
+  align-content: center;
+  height: 50em;
+}
