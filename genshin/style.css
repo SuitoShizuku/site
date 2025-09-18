@@ -6,9 +6,29 @@
     text-align: center;
     font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
 }
+.lunar-charged{
+  background: -webkit-linear-gradient(top, #E19BFF, #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.lunar-bloom{
+  background: -webkit-linear-gradient(top, #00EA52, #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.lunar-charged h2{
+  background: -webkit-linear-gradient(top, #E19BFF, #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.lunar-bloom h2{
+  background: -webkit-linear-gradient(top, #00EA52, #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
 @font-face {
-    font-family: "genshin"; /*任意のフォントファミリー名でOK*/
+    font-family: "genshin";
     src: url("./font/genshin.ttf") format("truetype");
     font-display: swap;
 }
