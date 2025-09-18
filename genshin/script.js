@@ -1,4 +1,8 @@
+const PARAMS = new URLSearchParams(location.search)
+
 window.addEventListener('load', function () {
+    document.getElementById('uid').value = PARAMS.get('uid')
+
     function setCharaList() {
         const UID = document.getElementById('uid').value
 
@@ -171,6 +175,7 @@ window.addEventListener('load', function () {
         const LEVEL = Number(document.getElementById('level').value)
         var target_def = (LEVEL + 100) / ((1 - ignore) * (1 - down) * (targetLevel + 100) + LEVEL + 100)
         document.getElementById('target-def-out').textContent = target_def
+        mathDamage()
     }
     document.getElementById('target-level').oninput = calcTargetDefence;
     document.getElementById('target-def-ignore').oninput = calcTargetDefence;
@@ -396,6 +401,18 @@ window.addEventListener('load', function () {
     document.getElementById('box_spread').oninput = DendroReactBox;
     document.getElementById('box_lunar_bloom').oninput = DendroReactBox;
 
+    function lunarNodcharaBuffCheck(){
+        if(document.getElementById('if_nodchara').checked){
+            document.getElementById('box_nodchara_basebuff').style.display = 'block'
+        }else {
+            document.getElementById('box_nodchara_basebuff').style.display = 'none'
+            document.getElementById('nodchara_basebuff').value = ''
+        }
+        mathDamage;
+    }
+    document.getElementById('if_nodchara').oninput = lunarNodcharaBuffCheck;
+    document.getElementById('nodchara_basebuff').oninput = mathDamage;
+
     function atkRateBase() {
         const type = document.getElementById('atkRate-Base')
         var Box = document.getElementById('emRateView')
@@ -466,9 +483,9 @@ window.addEventListener('load', function () {
 
         //ダメージバフ処理
         let DamageBuff = 1 + DamageBuffList[0] + DamageBuffList[element] + DamageBuffList[attack_type + 8]
-        Damage *= DamageBuff
-        //元素反応処理(蒸発・溶解)
-        if (element == '2') {
+        if(!(lunar_reaction[0] || lunar_reaction[1])) Damage *= DamageBuff
+        //元素反応処理(蒸発・溶解・月反応)
+        if (element == '2') { //蒸発・溶解反応
             if (pyro_reaction[0]) {
                 Damage *= 1.5 * (1 + Number(document.getElementById('em-bonus-1').textContent.slice(1, -2)) * 0.01 + Number(document.getElementById('react-bonus-9').value) * 0.01)
             } else if (pyro_reaction[1]) {
@@ -484,19 +501,27 @@ window.addEventListener('load', function () {
                 Damage *= 1.5 * (1 + Number(document.getElementById('em-bonus-1').textContent.slice(1, -2)) * 0.01 + Number(document.getElementById('react-bonus-9').value) * 0.01)
             }
         }
+        let basebuff = 1 + Number(document.getElementById('nodchara_basebuff').value) * 0.01
+        if(lunar_reaction[0]){ //月反応
+            Damage *= basebuff
+            Damage *= 3 * (1 + Number(document.getElementById('em-bonus-4').textContent.slice(1, -2)) * 0.01 + Number(document.getElementById('react-bonus-11').value) * 0.01)
+        }else if(lunar_reaction[1]){
+            Damage *= basebuff
+            Damage *= 2.8 * (1 + Number(document.getElementById('em-bonus-4').textContent.slice(1, -2)) * 0.01 + Number(document.getElementById('react-bonus-11').value) * 0.01)
+        }
 
         //敵耐性処理
         Damage *= Number(document.getElementById('res-out').textContent)
         //敵防御処理
-        Damage *= Number(document.getElementById('target-def-out').textContent)
+        if(!(lunar_reaction[0] || lunar_reaction[1])) Damage *= Number(document.getElementById('target-def-out').textContent)
 
         //会心処理
         let Damage_Crit = Damage * (1 + Number(document.getElementById('status_critdmg').value) * 0.01)
         let Damage_Expect = Damage * Number(document.getElementById('critDamageRate').textContent)
         //表示
-        document.getElementById('damage-print-crit').textContent = Damage_Crit;
-        document.getElementById('damage-print').textContent = Damage_Expect;
-        document.getElementById('damage-print-nocrit').textContent = Damage;
+        document.getElementById('damage-print-crit').textContent = Math.floor(Damage_Crit * 1000) / 1000;
+        document.getElementById('damage-print').textContent = Math.floor(Damage_Expect * 1000) / 1000;
+        document.getElementById('damage-print-nocrit').textContent = Math.floor(Damage * 1000) / 1000;
     }
     document.getElementById('status_atk').oninput = mathDamage;
     document.getElementById('status_hp').oninput = mathDamage;
@@ -508,4 +533,7 @@ window.addEventListener('load', function () {
     document.getElementById('AddBaseDmg').oninput = mathDamage;
     document.getElementById('element-type').oninput = mathDamage;
     document.getElementById('attack-type').oninput = mathDamage;
+    document.getElementById('react-bonus-9').oninput = mathDamage;
+    document.getElementById('react-bonus-10').oninput = mathDamage;
+    document.getElementById('react-bonus-11').oninput = mathDamage;
 });
