@@ -239,6 +239,15 @@ window.addEventListener('load', function () {
             box.style.display = 'none'
         }
     }
+        function InputViewToggle(react, view) {
+        var box = document.getElementById('input_' + react)
+        if (view == 'show') {
+            box.style.display = 'block'
+        } else if (view == 'hide') {
+            box.style.display = 'none'
+        }
+    }
+
     const lightenColor = (rgb, percentage) => {
         let [r, g, b] = rgb.match(/\d+/g).map(x => x * percentage);
         return `rgb(${r}, ${g}, ${b})`;
@@ -274,6 +283,9 @@ window.addEventListener('load', function () {
         var text_color = document.getElementById('output-damage')
         if (element == '1') {
             text_color.style.color = '#FFFFFF'
+            InputViewToggle('bonus_pyro', 'hide')
+            InputViewToggle('bonus_catalyze', 'hide')
+            InputViewToggle('bonus_lunar', 'hide')
             BoxViewToggle('vaporize', 'hide')
             BoxViewToggle('melt', 'hide')
             BoxViewToggle('aggravate', 'hide')
@@ -282,6 +294,8 @@ window.addEventListener('load', function () {
             BoxViewToggle('lunar_bloom', 'hide')
         } else if (element == '2') {
             text_color.style.color = '#FF9B00'
+            InputViewToggle('bonus_catalyze', 'hide')
+            InputViewToggle('bonus_lunar', 'hide')
             BoxViewToggle('vaporize', 'show')
             BoxViewToggle('melt', 'show')
             BoxViewToggle('aggravate', 'hide')
@@ -290,6 +304,8 @@ window.addEventListener('load', function () {
             BoxViewToggle('lunar_bloom', 'hide')
         } else if (element == '3') {
             text_color.style.color = '#33CCFF'
+            InputViewToggle('bonus_catalyze', 'hide')
+            InputViewToggle('bonus_lunar', 'hide')
             BoxViewToggle('vaporize', 'show')
             BoxViewToggle('melt', 'hide')
             BoxViewToggle('aggravate', 'hide')
@@ -298,6 +314,8 @@ window.addEventListener('load', function () {
             BoxViewToggle('lunar_bloom', 'hide')
         } else if (element == '4') {
             text_color.style.color = '#99FFFF'
+            InputViewToggle('bonus_catalyze', 'hide')
+            InputViewToggle('bonus_lunar', 'hide')
             BoxViewToggle('vaporize', 'hide')
             BoxViewToggle('melt', 'show')
             BoxViewToggle('aggravate', 'hide')
@@ -306,6 +324,7 @@ window.addEventListener('load', function () {
             BoxViewToggle('lunar_bloom', 'hide')
         } else if (element == '5') {
             text_color.style.color = '#E19BFF'
+            InputViewToggle('bonus_pyro', 'hide')
             BoxViewToggle('vaporize', 'hide')
             BoxViewToggle('melt', 'hide')
             BoxViewToggle('aggravate', 'show')
@@ -314,6 +333,9 @@ window.addEventListener('load', function () {
             BoxViewToggle('lunar_bloom', 'hide')
         } else if (element == '6') {
             text_color.style.color = '#66FFCC'
+            InputViewToggle('bonus_pyro', 'hide')
+            InputViewToggle('bonus_catalyze', 'hide')
+            InputViewToggle('bonus_lunar', 'hide')
             BoxViewToggle('vaporize', 'hide')
             BoxViewToggle('melt', 'hide')
             BoxViewToggle('aggravate', 'hide')
@@ -322,6 +344,9 @@ window.addEventListener('load', function () {
             BoxViewToggle('lunar_bloom', 'hide')
         } else if (element == '7') {
             text_color.style.color = '#FFCC66'
+            InputViewToggle('bonus_pyro', 'hide')
+            InputViewToggle('bonus_catalyze', 'hide')
+            InputViewToggle('bonus_lunar', 'hide')
             BoxViewToggle('vaporize', 'hide')
             BoxViewToggle('melt', 'hide')
             BoxViewToggle('aggravate', 'hide')
@@ -330,6 +355,8 @@ window.addEventListener('load', function () {
             BoxViewToggle('lunar_bloom', 'hide')
         } else if (element == '8') {
             text_color.style.color = '#00EA52'
+            InputViewToggle('bonus_catalyze', 'hide')
+            InputViewToggle('bonus_lunar', 'hide')
             BoxViewToggle('vaporize', 'hide')
             BoxViewToggle('melt', 'hide')
             BoxViewToggle('aggravate', 'hide')
@@ -337,6 +364,9 @@ window.addEventListener('load', function () {
             BoxViewToggle('spread', 'show')
             BoxViewToggle('lunar_bloom', 'show')
         } else {
+            InputViewToggle('bonus_pyro', 'hide')
+            InputViewToggle('bonus_catalyze', 'hide')
+            InputViewToggle('bonus_lunar', 'hide')
             BoxViewToggle('vaporize', 'hide')
             BoxViewToggle('melt', 'hide')
             BoxViewToggle('aggravate', 'hide')
@@ -358,9 +388,13 @@ window.addEventListener('load', function () {
         if (vaporize.checked) {
             melt.disable = true
             melt.checked = false
+            InputViewToggle('bonus_pyro', 'show')
         } else if (melt.checked) {
             vaporize.disable = true
             vaporize.checked = false
+            InputViewToggle('bonus_pyro', 'show')
+        }else{
+            InputViewToggle('bonus_pyro', 'hide')
         }
         mathDamage()
     }
@@ -374,9 +408,16 @@ window.addEventListener('load', function () {
         if (aggravate.checked) {
             lunar_charged.disable = true
             lunar_charged.checked = false
+            InputViewToggle('bonus_catalyze', 'show')
+            InputViewToggle('bonus_lunar', 'hide')
         } else if (lunar_charged.checked) {
             aggravate.disable = true
             aggravate.checked = false
+            InputViewToggle('bonus_catalyze', 'hide')
+            InputViewToggle('bonus_lunar', 'show')
+        }else{
+            InputViewToggle('bonus_catalyze', 'hide')
+            InputViewToggle('bonus_lunar', 'hide')
         }
         lrColor();
         mathDamage();
@@ -391,9 +432,16 @@ window.addEventListener('load', function () {
         if (spread.checked) {
             lunar_bloom.disable = true
             lunar_bloom.checked = false
+            InputViewToggle('bonus_catalyze', 'show')
+            InputViewToggle('bonus_lunar', 'hide')
         } else if (lunar_bloom.checked) {
             spread.disable = true
             spread.checked = false
+            InputViewToggle('bonus_catalyze', 'hide')
+            InputViewToggle('bonus_lunar', 'show')
+        }else{
+            InputViewToggle('bonus_catalyze', 'hide')
+            InputViewToggle('bonus_lunar', 'hide')
         }
         lrColor();
         mathDamage();
@@ -507,7 +555,7 @@ window.addEventListener('load', function () {
             Damage *= 3 * (1 + Number(document.getElementById('em-bonus-4').textContent.slice(1, -2)) * 0.01 + Number(document.getElementById('react-bonus-11').value) * 0.01)
         }else if(lunar_reaction[1]){
             Damage *= basebuff
-            Damage *= 2.8 * (1 + Number(document.getElementById('em-bonus-4').textContent.slice(1, -2)) * 0.01 + Number(document.getElementById('react-bonus-11').value) * 0.01)
+            Damage *= 1 * (1 + Number(document.getElementById('em-bonus-4').textContent.slice(1, -2)) * 0.01 + Number(document.getElementById('react-bonus-11').value) * 0.01)
         }
 
         //敵耐性処理
