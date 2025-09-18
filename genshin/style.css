@@ -41,9 +41,9 @@
     -webkit-text-stroke-width: 0.2px;
 }
 .output-damage-box{
-  background-image: url('./image/damage-background.png');
+  background-image: url('./image/damage-backgrounds/2.png');
   background-size: cover;
-  background-position-y: center;
+  background-position: center;
   vertical-align: middle;
   align-content: center;
   height: 50em;
