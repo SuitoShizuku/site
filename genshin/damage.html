@@ -124,6 +124,16 @@
                 <h4>敵防御係数</h4>
                 <label id="target-def-out"></label>
             </div>
+            <h3>聖遺物バフ</h3>
+            <div>
+                <label>聖遺物: <select>
+                    <option value="1">剣闘士-4セット</option>
+                </select></label><br>
+                <label>効果量<input type="range" max="1" min="0" value="1" id="artifact-buff-value"><span id="artifact-buff-range"></span></label><br>
+                <button id="artifact-buff-btn-math">効果量を計算</button>
+                <button id="artifact-buff-btn-math">計算してステータスに足す</button>
+                <button id="artifact-buff-btn-math">計算してステータスから引く</button>
+            </div>
             <h3>ダメージ一覧</h3>
             <div>
                 <h4>元素反応ダメージ</h4>

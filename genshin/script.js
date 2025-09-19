@@ -208,7 +208,6 @@ window.addEventListener('load', function () {
             nilo_bonus = (Number(document.getElementById('nilo_hp').value) - 29999) * 0.00009
             if (nilo_bonus < 0) nilo_bonus = 0
             if (nilo_bonus > 4) nilo_bonus = 4
-            console.log(nilo_bonus)
         } else {
             nilo_bonus = 0
         }
