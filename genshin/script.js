@@ -212,14 +212,14 @@ window.addEventListener('load', function () {
         } else {
             nilo_bonus = 0
         }
-        const REACT_BONUS_1 = Number(document.getElementById('react-bonus-1').value)
-        const REACT_BONUS_2 = Number(document.getElementById('react-bonus-2').value)
-        const REACT_BONUS_3 = Number(document.getElementById('react-bonus-3').value)
-        const REACT_BONUS_4 = Number(document.getElementById('react-bonus-4').value)
-        const REACT_BONUS_5 = Number(document.getElementById('react-bonus-5').value)
-        const REACT_BONUS_6 = Number(document.getElementById('react-bonus-6').value)
-        const REACT_BONUS_7 = Number(document.getElementById('react-bonus-7').value)
-        const REACT_BONUS_8 = Number(document.getElementById('react-bonus-8').value)
+        const REACT_BONUS_1 = Number(document.getElementById('react-bonus-1').value) * 0.01
+        const REACT_BONUS_2 = Number(document.getElementById('react-bonus-2').value) * 0.01
+        const REACT_BONUS_3 = Number(document.getElementById('react-bonus-3').value) * 0.01
+        const REACT_BONUS_4 = Number(document.getElementById('react-bonus-4').value) * 0.01
+        const REACT_BONUS_5 = Number(document.getElementById('react-bonus-5').value) * 0.01
+        const REACT_BONUS_6 = Number(document.getElementById('react-bonus-6').value) * 0.01
+        const REACT_BONUS_7 = Number(document.getElementById('react-bonus-7').value) * 0.01
+        const REACT_BONUS_8 = Number(document.getElementById('react-bonus-8').value) * 0.01
         document.getElementById('react1').textContent = Math.floor(REACTION_BY_LV[LEVEL] * 0.25 * (1 + EM_BONUS + REACT_BONUS_1) * Resistance)
         document.getElementById('react2').textContent = Math.floor(REACTION_BY_LV[LEVEL] * 1.5 * (1 + EM_BONUS + REACT_BONUS_2) * Resistance)
         document.getElementById('react3').textContent = Math.floor(REACTION_BY_LV[LEVEL] * 0.6 * (1 + EM_BONUS + REACT_BONUS_3) * Resistance)
@@ -229,6 +229,14 @@ window.addEventListener('load', function () {
         document.getElementById('react7').textContent = Math.floor(REACTION_BY_LV[LEVEL] * 2 * (1 + EM_BONUS + REACT_BONUS_7 + nilo_bonus) * Resistance)
         document.getElementById('react8').textContent = Math.floor(REACTION_BY_LV[LEVEL] * 3 * (1 + EM_BONUS + REACT_BONUS_8) * Resistance)
     }
+    document.getElementById('react-bonus-1').oninput = calcReactionDMG;
+    document.getElementById('react-bonus-2').oninput = calcReactionDMG;
+    document.getElementById('react-bonus-3').oninput = calcReactionDMG;
+    document.getElementById('react-bonus-4').oninput = calcReactionDMG;
+    document.getElementById('react-bonus-5').oninput = calcReactionDMG;
+    document.getElementById('react-bonus-6').oninput = calcReactionDMG;
+    document.getElementById('react-bonus-7').oninput = calcReactionDMG;
+    document.getElementById('react-bonus-8').oninput = calcReactionDMG;
 
     function BoxViewToggle(react, view) {
         var box = document.getElementById('box_' + react)
