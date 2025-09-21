@@ -144,7 +144,7 @@ function setDataFromParam(){
 
 window.addEventListener('load', function () {
     const PARAMS = new URLSearchParams(location.search)
-    if(PARAMS.size >= 1) setDataFromParam()
+    if(PARAMS.size >= 2) setDataFromParam()
 
     function setCharaList() {
         const UID = document.getElementById('uid').value
