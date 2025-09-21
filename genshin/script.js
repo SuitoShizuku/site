@@ -1,5 +1,3 @@
-const PARAMS = new URLSearchParams(location.search)
-
 function genParamFromData(){
     const Single = function(key,value){
         if(document.getElementById(value).value) {
@@ -59,7 +57,8 @@ function genParamFromData(){
     result += 'v=1.0'
     return result
 }
-function setDataFromParam(PARAMS){
+function setDataFromParam(){
+    const PARAMS = new URLSearchParams(location.search)
     document.getElementById('uid').value = PARAMS.get('uid')
     document.getElementById('level').value = PARAMS.get('level')
     document.getElementById('status_atk').value = PARAMS.get('atk')
@@ -69,10 +68,12 @@ function setDataFromParam(PARAMS){
     document.getElementById('status_def').value = PARAMS.get('def')
     document.getElementById('status_basedef').value = PARAMS.get('def_base')
     document.getElementById('status_em').value = PARAMS.get('em')
-    const PARAMS_CRIT = PARAMS.get('crit').split(':')
+    var PARAMS_CRIT = PARAMS.get('crit') || ':'
+    PARAMS_CRIT = PARAMS_CRIT.split(":")
     document.getElementById('status_critrate').value = PARAMS_CRIT[0]
     document.getElementById('status_critdmg').value = PARAMS_CRIT[1]
-    const PARAMS_DMGBUFF = PARAMS.get('dmgbuff').split(':')
+    var PARAMS_DMGBUFF = PARAMS.get('dmgbuff') || ':::::::::::::'
+    PARAMS_DMGBUFF = PARAMS_DMGBUFF.split(":")
     document.getElementById('damagebuff-1').value = PARAMS_DMGBUFF[0]
     document.getElementById('damagebuff-2').value = PARAMS_DMGBUFF[1]
     document.getElementById('damagebuff-3').value = PARAMS_DMGBUFF[2]
@@ -87,15 +88,18 @@ function setDataFromParam(PARAMS){
     document.getElementById('damagebuff-12').value = PARAMS_DMGBUFF[11]
     document.getElementById('damagebuff-13').value = PARAMS_DMGBUFF[12]
     document.getElementById('damagebuff-14').value = PARAMS_DMGBUFF[13]
-    const PARAMS_RES = PARAMS.get('target_res').split(':')
+    var PARAMS_RES = PARAMS.get('target_res')
+    PARAMS_RES = PARAMS_RES.split(":") || '::'
     document.getElementById('res-base').value = PARAMS_RES[0]
     document.getElementById('res-up').value = PARAMS_RES[1]
     document.getElementById('res-down').value = PARAMS_RES[2]
-    const PARAMS_DEF = PARAMS.get('target_def').split(':')
+    var PARAMS_DEF = PARAMS.get('target_def')
+    PARAMS_DEF = PARAMS_DEF.split(":") || '::'
     document.getElementById('target-level').value = PARAMS_DEF[0]
     document.getElementById('target-def-ignore').value = PARAMS_DEF[1]
     document.getElementById('target-def-down').value = PARAMS_DEF[2]
-    const PARAMS_REACTBONUS = PARAMS.get('react_bonus').split(':')
+    var PARAMS_REACTBONUS = PARAMS.get('react_bonus') || '::::::::::'
+    PARAMS_REACTBONUS = PARAMS_REACTBONUS.split(":")
     document.getElementById('react-bonus-1').value = PARAMS_REACTBONUS[0]
     document.getElementById('react-bonus-2').value = PARAMS_REACTBONUS[1]
     document.getElementById('react-bonus-3').value = PARAMS_REACTBONUS[2]
@@ -130,7 +134,8 @@ function setDataFromParam(PARAMS){
 }
 
 window.addEventListener('load', function () {
-    if(PARAMS.length >= 1) setDataFromParam(PARAMS)
+    const PARAMS = new URLSearchParams(location.search)
+    if(PARAMS.size >= 1) setDataFromParam()
 
     function setCharaList() {
         const UID = document.getElementById('uid').value
