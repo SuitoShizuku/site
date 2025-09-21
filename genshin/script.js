@@ -706,7 +706,9 @@ window.addEventListener('load', function () {
         document.getElementById('damage-print-crit').textContent = Math.floor(Damage_Crit * 1000) / 1000;
         document.getElementById('damage-print').textContent = Math.floor(Damage_Expect * 1000) / 1000;
         document.getElementById('damage-print-nocrit').textContent = Math.floor(Damage * 1000) / 1000;
-        document.getElementById('share-link').value = location.toString()+genParamFromData()
+        //コピー用
+        const adr = location.toString().split('?')
+        document.getElementById('share-link').value = adr[0]+genParamFromData()
     }
     document.getElementById('status_atk').oninput = mathDamage;
     document.getElementById('status_hp').oninput = mathDamage;
