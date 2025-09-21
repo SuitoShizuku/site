@@ -56,6 +56,15 @@ function genParamFromData(){
     result += Single('damage_base_multiplicate','atkRate-Multiple')
     result += 'v=1.0'
     return result
+        .replace('level=90&','')
+        .replace('crit=5:50&','')
+        .replace('target_res=10:0:0&','')
+        .replace('target_def=95:0:0&','')
+        .replace('element=1&','')
+        .replace('damage_type=1&','')
+        .replace('damage_rate=100&','')
+        .replace('damage_base=1&','')
+        .replace('damage_base_multiplicate=100&','')
 }
 function setDataFromParam(){
     const PARAMS = new URLSearchParams(location.search)
