@@ -1,7 +1,136 @@
 const PARAMS = new URLSearchParams(location.search)
 
-window.addEventListener('load', function () {
+function genParamFromData(){
+    const Single = function(key,value){
+        if(document.getElementById(value).value) {
+            return `${key}=${document.getElementById(value).value}&`
+        }
+        return ''
+    }
+    const Multiple = function(key,value){
+        let result = key+'='
+        for(let i=0;i<value.length;i++){
+            result += document.getElementById(value[i]).value
+            result += ':'
+        }
+        let failedPattern = key+'='
+        for(let i=0;i<value.length;i++){
+            failedPattern += ':'
+        }
+        if(result == failedPattern) {
+            return ''
+        }
+        return result.slice(0,-1)+'&'
+    }
+    var result = '?'
+    result += Single('uid','uid')
+    result += Single('level','level')
+    result += Single('atk','status_atk')
+    result += Single('atk_base','status_baseatk')
+    result += Single('hp','status_hp')
+    result += Single('hp_base','status_basehp')
+    result += Single('def','status_def')
+    result += Single('def_base','status_basedef')
+    result += Single('em','status_em')
+    result += Multiple('crit',['status_critrate','status_critdmg'])
+    result += Multiple('dmgbuff',['damagebuff-1','damagebuff-2','damagebuff-3','damagebuff-4','damagebuff-5','damagebuff-6','damagebuff-7','damagebuff-8','damagebuff-9','damagebuff-10','damagebuff-11','damagebuff-12','damagebuff-13','damagebuff-14'])
+    result += Multiple('target_res',['res-base','res-up','res-down'])
+    result += Multiple('target_def',['target-level','target-def-ignore','target-def-down'])
+    result += Multiple('react_bonus',['react-bonus-1','react-bonus-2','react-bonus-3','react-bonus-4','react-bonus-5','react-bonus-6','react-bonus-7','react-bonus-8','react-bonus-9','react-bonus-10','react-bonus-11'])
+    result += Single('element','element-type')
+    if(document.getElementById('vaporize').checked){
+        result += 'react=vaporize&'
+    }else if(document.getElementById('melt').checked){
+        result += 'react=melt&'
+    }else if(document.getElementById('aggravate').checked){
+        result += 'react=aggravate&'
+    }else if(document.getElementById('lunar_charged').checked){
+        result += 'react=lunar_charged&'
+    }else if(document.getElementById('spread').checked){
+        result += 'react=spread&'
+    }else if(document.getElementById('lunar_bloom').checked){
+        result += 'react=lunar_bloom&'
+    }
+    result += Single('damage_type','attack-type')
+    result += Single('damage_rate','atkRate')
+    result += Single('damage_base','atkRate-Base')
+    result += Single('damage_base_add','AddBaseDmg')
+    result += Single('damage_base_multiplicate','atkRate-Multiple')
+    result += 'v=1.0'
+    return result
+}
+function setDataFromParam(PARAMS){
     document.getElementById('uid').value = PARAMS.get('uid')
+    document.getElementById('level').value = PARAMS.get('level')
+    document.getElementById('status_atk').value = PARAMS.get('atk')
+    document.getElementById('status_baseatk').value = PARAMS.get('atk_base')
+    document.getElementById('status_hp').value = PARAMS.get('hp')
+    document.getElementById('status_basehp').value = PARAMS.get('hp_base')
+    document.getElementById('status_def').value = PARAMS.get('def')
+    document.getElementById('status_basedef').value = PARAMS.get('def_base')
+    document.getElementById('status_em').value = PARAMS.get('em')
+    const PARAMS_CRIT = PARAMS.get('crit').split(':')
+    document.getElementById('status_critrate').value = PARAMS_CRIT[0]
+    document.getElementById('status_critdmg').value = PARAMS_CRIT[1]
+    const PARAMS_DMGBUFF = PARAMS.get('dmgbuff').split(':')
+    document.getElementById('damagebuff-1').value = PARAMS_DMGBUFF[0]
+    document.getElementById('damagebuff-2').value = PARAMS_DMGBUFF[1]
+    document.getElementById('damagebuff-3').value = PARAMS_DMGBUFF[2]
+    document.getElementById('damagebuff-4').value = PARAMS_DMGBUFF[3]
+    document.getElementById('damagebuff-5').value = PARAMS_DMGBUFF[4]
+    document.getElementById('damagebuff-6').value = PARAMS_DMGBUFF[5]
+    document.getElementById('damagebuff-7').value = PARAMS_DMGBUFF[6]
+    document.getElementById('damagebuff-8').value = PARAMS_DMGBUFF[7]
+    document.getElementById('damagebuff-9').value = PARAMS_DMGBUFF[8]
+    document.getElementById('damagebuff-10').value = PARAMS_DMGBUFF[9]
+    document.getElementById('damagebuff-11').value = PARAMS_DMGBUFF[10]
+    document.getElementById('damagebuff-12').value = PARAMS_DMGBUFF[11]
+    document.getElementById('damagebuff-13').value = PARAMS_DMGBUFF[12]
+    document.getElementById('damagebuff-14').value = PARAMS_DMGBUFF[13]
+    const PARAMS_RES = PARAMS.get('target_res').split(':')
+    document.getElementById('res-base').value = PARAMS_RES[0]
+    document.getElementById('res-up').value = PARAMS_RES[1]
+    document.getElementById('res-down').value = PARAMS_RES[2]
+    const PARAMS_DEF = PARAMS.get('target_def').split(':')
+    document.getElementById('target-level').value = PARAMS_DEF[0]
+    document.getElementById('target-def-ignore').value = PARAMS_DEF[1]
+    document.getElementById('target-def-down').value = PARAMS_DEF[2]
+    const PARAMS_REACTBONUS = PARAMS.get('react_bonus').split(':')
+    document.getElementById('react-bonus-1').value = PARAMS_REACTBONUS[0]
+    document.getElementById('react-bonus-2').value = PARAMS_REACTBONUS[1]
+    document.getElementById('react-bonus-3').value = PARAMS_REACTBONUS[2]
+    document.getElementById('react-bonus-4').value = PARAMS_REACTBONUS[3]
+    document.getElementById('react-bonus-5').value = PARAMS_REACTBONUS[4]
+    document.getElementById('react-bonus-6').value = PARAMS_REACTBONUS[5]
+    document.getElementById('react-bonus-7').value = PARAMS_REACTBONUS[6]
+    document.getElementById('react-bonus-8').value = PARAMS_REACTBONUS[7]
+    document.getElementById('react-bonus-9').value = PARAMS_REACTBONUS[8]
+    document.getElementById('react-bonus-10').value = PARAMS_REACTBONUS[9]
+    document.getElementById('react-bonus-11').value = PARAMS_REACTBONUS[10]
+    document.getElementById('element-type').value = PARAMS.get('element')
+    const PARAM_REACT = PARAMS.get('react')
+    if(PARAM_REACT == 'vaporize'){
+        document.getElementById('vaporize').checked = true
+    }else if(PARAM_REACT == 'melt'){
+        document.getElementById('melt').checked = true
+    }else if(PARAM_REACT == 'aggravate'){
+        document.getElementById('aggravate').checked = true
+    }else if(PARAM_REACT == 'lunar_charged'){
+        document.getElementById('lunar_charged').checked = true
+    }else if(PARAM_REACT == 'spread'){
+        document.getElementById('spread').checked = true
+    }else if(PARAM_REACT == 'lunar_bloom'){
+        document.getElementById('lunar_bloom').checked = true
+    }
+    document.getElementById('attack-type').value = PARAMS.get('damage_type')
+    document.getElementById('atkRate').value = PARAMS.get('damage_rate')
+    document.getElementById('atkRate-Base').value = PARAMS.get('damage_base')
+    document.getElementById('AddBaseDmg').value = PARAMS.get('damage_base_add')
+    document.getElementById('atkRate-Multiple').value = PARAMS.get('damage_base_multiplicate')
+}
+
+window.addEventListener('load', function () {
+    if(PARAMS.length >= 1) setDataFromParam(PARAMS)
 
     function setCharaList() {
         const UID = document.getElementById('uid').value
@@ -577,6 +706,7 @@ window.addEventListener('load', function () {
         document.getElementById('damage-print-crit').textContent = Math.floor(Damage_Crit * 1000) / 1000;
         document.getElementById('damage-print').textContent = Math.floor(Damage_Expect * 1000) / 1000;
         document.getElementById('damage-print-nocrit').textContent = Math.floor(Damage * 1000) / 1000;
+        document.getElementById('share-link').value = location.toString()+genParamFromData()
     }
     document.getElementById('status_atk').oninput = mathDamage;
     document.getElementById('status_hp').oninput = mathDamage;
@@ -591,4 +721,17 @@ window.addEventListener('load', function () {
     document.getElementById('react-bonus-9').oninput = mathDamage;
     document.getElementById('react-bonus-10').oninput = mathDamage;
     document.getElementById('react-bonus-11').oninput = mathDamage;
+    document.getElementById('share-copy').addEventListener('click', () => {
+        if (!navigator.clipboard) {
+            alert("ブラウザが対応していません");
+            return;
+        }
+        navigator.clipboard.writeText(document.getElementById('share-link').value).then(
+            () => {
+                alert('クリップボードにコピーしました');
+            },
+            () => {
+                alert('クリップボードにコピーできませんでした');
+            });
+    });
 });

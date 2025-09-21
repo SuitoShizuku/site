@@ -124,8 +124,8 @@
                 <h4>敵防御係数</h4>
                 <label id="target-def-out"></label>
             </div>
-            <h3>聖遺物バフ</h3>
-            <div>
+            <h3 style="display: none;">聖遺物バフ</h3>
+            <div style="display: none;">
                 <label>聖遺物: <select>
                     <option value="1">剣闘士-4セット</option>
                 </select></label><br>
@@ -172,9 +172,9 @@
                 <div style="display: none;" id="box_lunar_charged"><label>月感電反応扱い<input type="checkbox" id="lunar_charged"></label><br></div>
                 <div style="display: none;" id="box_spread"><label>草激化反応<input type="checkbox" id="spread"></label><br></div>
                 <div style="display: none;" id="box_lunar_bloom"><label>月開花反応扱い<input type="checkbox" id="lunar_bloom"></label><br></div>
-                <div style="display: none;" id="input_bonus_pyro"><label>蒸発/溶解 反応ボーナス:<input type="text" id="react-bonus-9" placeholder="20%の場合20" value="0">%</label><br></div>
-                <div style="display: none;" id="input_bonus_catalyze"><label>激化反応ボーナス:<input type="text" id="react-bonus-10" placeholder="20%の場合20" value="0">%</label><br></div>
-                <div style="display: none;" id="input_bonus_lunar"><label>月反応ボーナス:<input type="text" id="react-bonus-11" placeholder="20%の場合20" value="0">%</label><label>固有天賦<input type="checkbox" id="if_nodchara"></label><label style="display: none;" id="box_nodchara_basebuff"><input type="text" placeholder="ｲﾈﾌｧ固有天賦3などの総量" id="nodchara_basebuff">%</label><br></div>
+                <div style="display: none;" id="input_bonus_pyro"><label>蒸発/溶解 反応ボーナス:<input type="text" id="react-bonus-9" placeholder="20%の場合20" value="">%</label><br></div>
+                <div style="display: none;" id="input_bonus_catalyze"><label>激化反応ボーナス:<input type="text" id="react-bonus-10" placeholder="20%の場合20" value="">%</label><br></div>
+                <div style="display: none;" id="input_bonus_lunar"><label>月反応ボーナス:<input type="text" id="react-bonus-11" placeholder="20%の場合20" value="">%</label><label>固有天賦<input type="checkbox" id="if_nodchara"></label><label style="display: none;" id="box_nodchara_basebuff"><input type="text" placeholder="ｲﾈﾌｧ固有天賦3などの総量" id="nodchara_basebuff">%</label><br></div>
                 <label>判定<select id="attack-type">
                         <option value="1">通常攻撃ダメージ</option>
                         <option value="2">重撃ダメージ</option>
@@ -196,6 +196,11 @@
                         <label>基礎ダメ加算<input type="text" id="AddBaseDmg" placeholder="基礎ダメージの実数加算値"></label><br>
                         <label>特殊乗算<input type="text" id="atkRate-Multiple" placeholder="宵宮・放浪者のスキル等" value="100">%</label>
                 </details>
+            </div>
+            <h3>共有</h3>
+            <div>
+                <input type="url" id="share-link" readonly style="width: 50em;height: 2em;"><br>
+                <button type="button" id="share-copy" style="width: 50em;height: 2em;">クリップボードにコピー</button><br>
             </div>
             <div id="output-damage" class="output-damage-box">
             <span class="text-damage-print text-crit" id="damage-print-crit-r"><h2>会心 <b id="damage-print-crit" class="text-damage">0</b> ダメージ</h2></span>
