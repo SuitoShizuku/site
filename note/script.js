@@ -3,9 +3,9 @@ window.addEventListener('load', function () {
   document.cookie = "DATA=TRUE;";
     console.log(document.cookie)
 
-    let cookie = document.cookie
-    const Data = cookie.split(';')
+    let Data = document.cookie.split(';')
     const Root = document.getElementById('root')
+    console.log(Data)
     for(let i=0;i<Data.length;i++){
         let d = document.createElement('p')
         d.className = 'Memo'
