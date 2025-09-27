@@ -8,6 +8,8 @@ window.addEventListener('load', function () {
     const Root = document.getElementById('root')
     for(let i=0;i<Data.length;i++){
         let d = document.createElement('p')
+        d.className = 'Memo'
+        d.id = Data[i]
         d.textContent = Data[i]
         Root.appendChild(d)
         console.log(Data[i])
