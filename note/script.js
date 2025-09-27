@@ -1,6 +1,6 @@
 window.addEventListener('load', function () {
   document.cookie = "DaitoJavascript=On;";
-  document.cookie = "DATA=TRUE";
+  document.cookie = "DATA=TRUE;";
     console.log(document.cookie)
 
     let cookie = document.cookie
@@ -10,5 +10,6 @@ window.addEventListener('load', function () {
         let d = document.createElement('p')
         d.textContent = Data[i]
         Root.appendChild(d)
+        console.log(Data[i])
     }
 });
