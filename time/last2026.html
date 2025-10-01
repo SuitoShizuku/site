@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=400, initial-scale=1.0">
+    <title>2026年残り</title>
+    <script>
+        function msToTime(ms, ignore) {
+            const MS = (ms % 1000)
+            const S = Math.floor(ms / 1000 % 60)
+            const M = Math.floor(ms / 60000 % 60)
+            const H = Math.floor(ms / 3600000 % 24)
+            const D = Math.floor(ms / 86400000 % 365.25)
+            const Y = Math.floor(ms / 31557600000)
+            if (ignore == "ms") {
+                if (Y >= 1) {
+                    return `${Y}年${D}日${H}時間${M}分${S}秒`
+                } else if (D >= 1) {
+                    return `${D}日${H}時間${M}分${S}秒`
+                } else if (H >= 1) {
+                    return `${H}時間${M}分${S}秒`
+                } else if (M >= 1) {
+                    return `${M}分${S}秒`
+                } else if (S >= 1) {
+                    return `${S}秒`
+                } else {
+                    return null
+                }
+            } else {
+                if (Y >= 1) {
+                    return `${Y}年${D}日${H}時間${M}分${S}.${MS}秒`
+                } else if (D >= 1) {
+                    return `${D}日${H}時間${M}分${S}.${MS}秒`
+                } else if (H >= 1) {
+                    return `${H}時間${M}分${S}.${MS}秒`
+                } else if (M >= 1) {
+                    return `${M}分${S}.${MS}秒`
+                } else if (S >= 1) {
+                    return `${S}.${MS}秒`
+                } else {
+                    return null
+                }
+            }
+        }
+        window.addEventListener('load', function(){
+            var now = new Date()
+            var newYear = new Date('2026/01/01 00:00:00')
+            document.getElementById('time').textContent = msToTime(newYear - now,'ms')
+
+            fetch('https://ipinfo.io?callback')
+                .then(res => res.json())
+                .then(json => {
+                    if(json.country == 'JP'){
+                        var ElementTimes = document.getElementById('times')
+                        ElementTimes.className = 'root notJP'
+                    }
+                }
+            )
+        })
+        let colorCodeTimestamp = 0
+        setInterval(() => {
+            var now = new Date()
+            var newYear = new Date('2026/01/01 00:00:00')
+            document.getElementById('time').textContent = msToTime(newYear - now, 'ms')
+            if(document.getElementById('times').className == 'root notJP') {
+                colorCodeTimestamp += 0.03
+                document.getElementById('times').style.color = `rgb(${Math.floor(Math.sin(colorCodeTimestamp)*127+128)},${Math.floor(Math.sin(colorCodeTimestamp-4000)*127+128)},${Math.floor(Math.sin(colorCodeTimestamp-8000)*127+128)})`
+                if(colorCodeTimestamp == 12000) colorCodeTimestamp = 0
+            }
+        }, 1);
+    </script>
+    <style>
+        body {
+            -webkit-text-size-adjust: 100%;
+        }
+        .root{
+            height: 98.5vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            -webkit-text-size-adjust: 100%;
+        }
+        .time{
+            text-align: center;
+            font-size: 5rem;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div id="times" class="root">
+        <span id="time" class="time"></span>
+    </div>
+</body>
+</html>
