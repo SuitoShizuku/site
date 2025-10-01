@@ -50,7 +50,7 @@
             fetch('https://ipinfo.io?callback')
                 .then(res => res.json())
                 .then(json => {
-                    if(json.country == 'JP'){
+                    if(json.country !== 'JP'){
                         var ElementTimes = document.getElementById('times')
                         ElementTimes.className = 'root notJP'
                     }
