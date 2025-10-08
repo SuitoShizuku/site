@@ -97,13 +97,13 @@ function setDataFromParam(){
     document.getElementById('damagebuff-12').value = PARAMS_DMGBUFF[11]
     document.getElementById('damagebuff-13').value = PARAMS_DMGBUFF[12]
     document.getElementById('damagebuff-14').value = PARAMS_DMGBUFF[13]
-    var PARAMS_RES = PARAMS.get('target_res') || '::'
+    var PARAMS_RES = PARAMS.get('target_res') || '10:0:0'
     PARAMS_RES = PARAMS_RES.split(":")
     document.getElementById('res-base').value = PARAMS_RES[0]
     document.getElementById('res-up').value = PARAMS_RES[1]
     document.getElementById('res-down').value = PARAMS_RES[2]
-    var PARAMS_DEF = PARAMS.get('target_def')
-    PARAMS_DEF = PARAMS_DEF.split(":") || '::'
+    var PARAMS_DEF = PARAMS.get('target_def') || '95:0:0'
+    PARAMS_DEF = PARAMS_DEF.split(":")
     document.getElementById('target-level').value = PARAMS_DEF[0]
     document.getElementById('target-def-ignore').value = PARAMS_DEF[1]
     document.getElementById('target-def-down').value = PARAMS_DEF[2]
@@ -120,7 +120,7 @@ function setDataFromParam(){
     document.getElementById('react-bonus-9').value = PARAMS_REACTBONUS[8]
     document.getElementById('react-bonus-10').value = PARAMS_REACTBONUS[9]
     document.getElementById('react-bonus-11').value = PARAMS_REACTBONUS[10]
-    document.getElementById('element-type').value = PARAMS.get('element')
+    document.getElementById('element-type').value = PARAMS.get('element') || '1'
     const PARAM_REACT = PARAMS.get('react')
     if(PARAM_REACT == 'vaporize'){
         document.getElementById('vaporize').checked = true
@@ -135,11 +135,11 @@ function setDataFromParam(){
     }else if(PARAM_REACT == 'lunar_bloom'){
         document.getElementById('lunar_bloom').checked = true
     }
-    document.getElementById('attack-type').value = PARAMS.get('damage_type')
-    document.getElementById('atkRate').value = PARAMS.get('damage_rate')
-    document.getElementById('atkRate-Base').value = PARAMS.get('damage_base')
+    document.getElementById('attack-type').value = PARAMS.get('damage_type') || '1'
+    document.getElementById('atkRate').value = PARAMS.get('damage_rate') || '100'
+    document.getElementById('atkRate-Base').value = PARAMS.get('damage_base') || '1'
     document.getElementById('AddBaseDmg').value = PARAMS.get('damage_base_add')
-    document.getElementById('atkRate-Multiple').value = PARAMS.get('damage_base_multiplicate')
+    document.getElementById('atkRate-Multiple').value = PARAMS.get('damage_base_multiplicate') || '100'
 }
 
 window.addEventListener('load', function () {
@@ -751,4 +751,6 @@ window.addEventListener('load', function () {
     //すべての初期化が終わった後にURLパラメータの情報を入れる。
     const PARAMS = new URLSearchParams(location.search)
     if(PARAMS.size >= 2) setDataFromParam()
+    //最後にもう一度ダメージ計算の更新をかける
+    mathDamage()
 });
