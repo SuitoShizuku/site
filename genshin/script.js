@@ -143,9 +143,6 @@ function setDataFromParam(){
 }
 
 window.addEventListener('load', function () {
-    const PARAMS = new URLSearchParams(location.search)
-    if(PARAMS.size >= 2) setDataFromParam()
-
     function setCharaList() {
         const UID = document.getElementById('uid').value
 
@@ -750,4 +747,8 @@ window.addEventListener('load', function () {
                 alert('クリップボードにコピーできませんでした');
             });
     });
+
+    //すべての初期化が終わった後にURLパラメータの情報を入れる。
+    const PARAMS = new URLSearchParams(location.search)
+    if(PARAMS.size >= 2) setDataFromParam()
 });
