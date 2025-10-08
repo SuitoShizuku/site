@@ -97,8 +97,8 @@ function setDataFromParam(){
     document.getElementById('damagebuff-12').value = PARAMS_DMGBUFF[11]
     document.getElementById('damagebuff-13').value = PARAMS_DMGBUFF[12]
     document.getElementById('damagebuff-14').value = PARAMS_DMGBUFF[13]
-    var PARAMS_RES = PARAMS.get('target_res')
-    PARAMS_RES = PARAMS_RES.split(":") || '::'
+    var PARAMS_RES = PARAMS.get('target_res') || '::'
+    PARAMS_RES = PARAMS_RES.split(":")
     document.getElementById('res-base').value = PARAMS_RES[0]
     document.getElementById('res-up').value = PARAMS_RES[1]
     document.getElementById('res-down').value = PARAMS_RES[2]
